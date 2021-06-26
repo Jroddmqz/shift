@@ -318,6 +318,9 @@ async def stealimage(client, message):
 
     try:
         fromchat =int(fromchat)
+        idlink = str(fromchat)
+        idlink = idlink.split("-100")
+        idlink = "t.me/c/" + idlink[1]
     except:
         if not (fromchat.startswith("@")):
             await lol.edit("Enter a vailed username or id")
@@ -328,7 +331,6 @@ async def stealimage(client, message):
         if not (tochat.startswith("@")):
             await lol.edit("Enter a vailed username or id")
             return
-
     try:
         msgid = int(msgid)
         q = 10
@@ -342,6 +344,20 @@ async def stealimage(client, message):
             if not (msgid.startswith("#")):
               await lol.edit("Enter a msg id valid or #2-10 for No. images per album")
               return
+
+    if not int(fromchat):
+        if (fromchat.startswith("@")):
+            idlink = fromchat.split("@")
+            idlink = "t.me/" + idlink[1]
+            
+    def isbotonera(message):
+        if message.entities:
+            url = 0
+            for MessageEntity in message.entities:
+                if MessageEntity.type == "text_link":
+                    url+=1
+            if url > 3:
+                return True
 
     a = 0
     album=[]
