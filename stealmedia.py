@@ -29,6 +29,9 @@ async def stealmedia(client, message):
 
     try:
         fromchat =int(fromchat)
+        idlink = str(fromchat)
+        idlink = idlink.split("-100")
+        idlink = "t.me/c/" + idlink[1]
     except:
         if not (fromchat.startswith("@")):
             await lol.edit("Enter a vailed username or id")
@@ -40,6 +43,11 @@ async def stealmedia(client, message):
             await lol.edit("Enter a vailed username or id")
             return
 
+    if not int(fromchat):
+        if (fromchat.startswith("@")):
+            idlink = fromchat.split("@")
+            idlink = "t.me/" + idlink[1]
+        
     
     def isbotonera(message):
         if message.entities:
@@ -49,10 +57,6 @@ async def stealmedia(client, message):
                     url+=1
             if url > 3:
                 return True
-
-    idlink = fromchat.split("@")
-    idlink.reverse()
-    idlink.pop()
 
     a = 0
     album=[]
@@ -161,8 +165,8 @@ async def stealmedia(client, message):
                   pass
                 await asyncio.sleep(1)
             if album:
-                await client.send_media_group(tochat, album)
-            await lol.edit(f"Successfully shifted {a} messages from {fromchat} to {tochat}. Last post: t.me/{idlink}/{lastmsgid}. {boto} keypad omitted.")
+                await client.send_media_group(tochat, album) 
+            await lol.edit(f"Successfully shifted {a} messages from {fromchat} to {tochat}. Last post: {idlink}/{lastmsgid}. {boto} keypad omitted.")
         except RPCError as i:
             # await lol.edit(i)
             return
@@ -273,7 +277,7 @@ async def stealmedia(client, message):
                 await asyncio.sleep(1)
             if album:
                 await client.send_media_group(tochat, album)
-            await lol.edit(f"Successfully shifted {a} messages from {fromchat} to {tochat}. Last post: t.me/{idlink}/{lastmsgid}. {boto} keypad omitted.")
+            await lol.edit(f"Successfully shifted {a} messages from {fromchat} to {tochat}. Last post: {idlink}/{lastmsgid}. {boto} keypad omitted.")
         except RPCError as i:
             # await lol.edit(i)
             return
@@ -424,7 +428,7 @@ async def stealimage(client, message):
 
             if album2:
                 await client.send_media_group(tochat, album2)
-            await lol.edit(f"Successfully shifted {a} messages from {fromchat} to {tochat}. Last post: t.me/{idlink}/{lastmsgid}. {boto} keypad omitted.")
+            await lol.edit(f"Successfully shifted {a} messages from {fromchat} to {tochat}. Last post: {idlink}/{lastmsgid}. {boto} keypad omitted.")
         except RPCError as i:
             await lol.edit(i)
             return
@@ -508,7 +512,7 @@ async def stealimage(client, message):
 
             if album2:
                 await client.send_media_group(tochat, album2)
-            await lol.edit(f"Successfully shifted {a} messages from {fromchat} to {tochat}. Last post: t.me/{idlink}/{lastmsgid}. {boto} keypad omitted.")
+            await lol.edit(f"Successfully shifted {a} messages from {fromchat} to {tochat}. Last post: {idlink}/{lastmsgid}. {boto} keypad omitted.")
         except RPCError as i:
             await lol.edit(i)
             return
