@@ -33,6 +33,8 @@ async def stealmedia(client, message):
         idlink = idlink.split("-100")
         idlink = "t.me/c/" + idlink[1]
     except:
+        idlink = fromchat.split("@")
+        idlink = "t.me/" + idlink[1]
         if not (fromchat.startswith("@")):
             await lol.edit("Enter a vailed username or id")
             return
@@ -43,10 +45,6 @@ async def stealmedia(client, message):
             await lol.edit("Enter a vailed username or id")
             return
 
-    if not int(fromchat):
-        if (fromchat.startswith("@")):
-            idlink = fromchat.split("@")
-            idlink = "t.me/" + idlink[1]
         
     
     def isbotonera(message):
@@ -322,6 +320,8 @@ async def stealimage(client, message):
         idlink = idlink.split("-100")
         idlink = "t.me/c/" + idlink[1]
     except:
+        idlink = fromchat.split("@")
+        idlink = "t.me/" + idlink[1]
         if not (fromchat.startswith("@")):
             await lol.edit("Enter a vailed username or id")
             return
@@ -345,11 +345,6 @@ async def stealimage(client, message):
               await lol.edit("Enter a msg id valid or #2-10 for No. images per album")
               return
 
-    if not int(fromchat):
-        if (fromchat.startswith("@")):
-            idlink = fromchat.split("@")
-            idlink = "t.me/" + idlink[1]
-            
     def isbotonera(message):
         if message.entities:
             url = 0
@@ -364,6 +359,7 @@ async def stealimage(client, message):
     album2=[]
     mediagid = 0
     lastmsgid = 0 
+    boto  = 0
     if msgid == 0:
         try:
             async for message in client.iter_history(fromchat, reverse=True):
