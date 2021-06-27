@@ -153,10 +153,13 @@ async def stealmedia(client, message):
                                     else:
                                         album.append(InputMediaAudio(message.audio.file_id, caption=captionalbum))
                 except Exception as e:
-                    if "[420 FLOOD_WAIT_X]" in str(e):
-                        print('Flood: Wait for', int(str(e).split()[5]), 'seconds')
-                        time.sleep(int(str(e).split()[5]))
-                    await lol.edit(e)
+                    try:
+                        if "[420 FLOOD_WAIT_X]" in str(e):
+                            print('Flood: Wait for', int(str(e).split()[5]), 'seconds')
+                            time.sleep(int(str(e).split()[5]))
+                            await lol.edit(f"Flood wait please. Last post: {lastmsgid}")
+                    except:
+                        await lol.edit(e)
                     pass
                 except RPCError as i:
                   await lol.edit(i)
@@ -264,10 +267,13 @@ async def stealmedia(client, message):
                                         album.append(InputMediaAudio(message.audio.file_id, caption=captionalbum))
 
                 except Exception as e:
-                    if "[420 FLOOD_WAIT_X]" in str(e):
-                        print('Flood: Wait for', int(str(e).split()[5]), 'seconds')
-                        time.sleep(int(str(e).split()[5]))
-                    await lol.edit(e)
+                    try:
+                        if "[420 FLOOD_WAIT_X]" in str(e):
+                            print('Flood: Wait for', int(str(e).split()[5]), 'seconds')
+                            time.sleep(int(str(e).split()[5]))
+                            await lol.edit(f"Flood wait please. Last post: {lastmsgid}")
+                    except:
+                        await lol.edit(e)
                     pass
                 except RPCError as i:
                   await lol.edit(i)
@@ -295,6 +301,7 @@ async def stealimage(client, message):
     x=x.replace(" ","")
     try:
         fromchat, tochat, msgid, quantity = x.split("|")
+        w = 4
         try:
             if (quantity.startswith("#")):
                 q = quantity.split("#")
@@ -306,9 +313,11 @@ async def stealimage(client, message):
     except:
         try:
             fromchat, tochat, msgid = x.split("|")
+            w = 3
         except:
             try:
                 fromchat, tochat = x.split("|")
+                w = 2
                 msgid = 0
                 q = 10
             except:
@@ -331,19 +340,33 @@ async def stealimage(client, message):
         if not (tochat.startswith("@")):
             await lol.edit("Enter a vailed username or id")
             return
-    try:
-        msgid = int(msgid)
-        q = 10
-    except:
-        try: 
+
+    if w == 3:
+        try:
             if (msgid.startswith("#")):
                 q = msgid.split("#")
                 q = int(q.pop())
                 msgid = 0
         except:
-            if not (msgid.startswith("#")):
-              await lol.edit("Enter a msg id valid or #2-10 for No. images per album")
-              return
+            try:
+                msgid = int(msgid)
+                q = 10
+            except:
+                if not (msg.startswith("#")):
+                    await lol.edit("Enter a msg id valor or #(2-10) for no. images per album")
+    elif w == 4:
+        try:
+            msgid = int(msgid)
+        except:
+            await lol.edit("Enter a msg id valid")
+            return
+########################################
+
+  #  if not int(fromchat):
+    #    if (fromchat.startswith("@")):
+   #     idlink = fromchat.split("@")
+    #    idlink = "t.me/" + idlink[1]
+########################################
 
     def isbotonera(message):
         if message.entities:
@@ -426,10 +449,13 @@ async def stealimage(client, message):
                                         album2.append(InputMediaPhoto(message.photo.file_id, caption=captionalbum))                                
                     ########################
                 except Exception as e:
-                    if "[420 FLOOD_WAIT_X]" in str(e):
-                        print('Flood: Wait for', int(str(e).split()[5]), 'seconds')
-                        time.sleep(int(str(e).split()[5]))
-                    await lol.edit(e)
+                    try:
+                        if "[420 FLOOD_WAIT_X]" in str(e):
+                            print('Flood: Wait for', int(str(e).split()[5]), 'seconds')
+                            time.sleep(int(str(e).split()[5]))
+                            await lol.edit(f"Flood wait please. Last post: {lastmsgid}")
+                    except:
+                        await lol.edit(e)
                     pass
                 except RPCError as i:
                     await lol.edit(i)
@@ -510,10 +536,13 @@ async def stealimage(client, message):
                                         album2.append(InputMediaPhoto(message.photo.file_id, caption=captionalbum))
                         #####################################################3
                 except Exception as e:
-                    if "[420 FLOOD_WAIT_X]" in str(e):
-                        print('Flood: Wait for', int(str(e).split()[5]), 'seconds')
-                        time.sleep(int(str(e).split()[5]))
-                    await lol.edit(e)
+                    try:
+                        if "[420 FLOOD_WAIT_X]" in str(e):
+                            print('Flood: Wait for', int(str(e).split()[5]), 'seconds')
+                            time.sleep(int(str(e).split()[5]))
+                            await lol.edit(f"Flood wait please. Last post: {lastmsgid}")
+                    except:
+                        await lol.edit(e)
                     pass
                 except RPCError as i:
                     await lol.edit(i)
