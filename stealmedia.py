@@ -44,16 +44,31 @@ async def stealmedia(client, message):
         if not (tochat.startswith("@")):
             await lol.edit("Enter a vailed username or id")
             return
-
-        
-    
+   
     def isbotonera(message):
+        ###############
+    #    if message.entities:
+#    #        inlk = message.entities
+#    #        linlk = [i.url for i in inlk if "t.me" in i.url]
+#
+    #        if len(linlk) >3:
+    #            return True
+        ###############
         if message.entities:
             url = 0
             for MessageEntity in message.entities:
                 if MessageEntity.type == "text_link":
                     url+=1
             if url > 3:
+                print("#", message.message_id ,"botonera texto:", len(linlk))
+                return True
+
+        if message.reply_markup:
+            inlk = message.reply_markup.inline_keyboard
+            linlk = [i[0].url for i in inlk if "t.me" in i[0].url]
+
+            if len(linlk) > 3:
+                print("#", message.message_id ,"botonera botones:", len(linlk))
                 return True
 
     a = 0
@@ -360,13 +375,6 @@ async def stealimage(client, message):
         except:
             await lol.edit("Enter a msg id valid")
             return
-########################################
-
-  #  if not int(fromchat):
-    #    if (fromchat.startswith("@")):
-   #     idlink = fromchat.split("@")
-    #    idlink = "t.me/" + idlink[1]
-########################################
 
     def isbotonera(message):
         if message.entities:
@@ -375,6 +383,15 @@ async def stealimage(client, message):
                 if MessageEntity.type == "text_link":
                     url+=1
             if url > 3:
+                print("#", message.message_id ,"botonera texto:", len(linlk))
+                return True
+
+        if message.reply_markup:
+            inlk = message.reply_markup.inline_keyboard
+            linlk = [i[0].url for i in inlk if "t.me" in i[0].url]
+
+            if len(linlk) > 3:
+                print("#", message.message_id ,"botonera botones:", len(linlk))
                 return True
 
     a = 0
