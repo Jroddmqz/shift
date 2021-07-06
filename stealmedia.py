@@ -47,35 +47,26 @@ async def stealmedia(client, message):
    
     def isbotonera(message):
         if message.entities:
-            link = message.entities
-            linkk = [i.url for i in link if "t.me" in i.url]
-
-            if len(linkk) >3:
-            #    print("#", message.message_id ,"botonera texto:", len(linkk))
+            url = 0
+            for MessageEntity in message.entities:
+                if MessageEntity.type == "text_link":
+                    url+=1
+            if url > 3:
                 return True
-
-#        if message.entities:
-#            url = 0
-#            for MessageEntity in message.entities:
-#                if MessageEntity.type == "text_link":
-#                    url+=1
-#            if url > 3:
-#                print("#", message.message_id ,"botonera texto:", url)
-#                return True
 
         if message.caption_entities:
-            link = message.caption_entities
-            linkk = [i.url for i in link if "t.me" in i.url]
-            if len (linkk) >3:
-            #    print("#", message.message_id, "botonera texto cap_ent", len(linkk))
-                return True
+            url = 0
+            for MessageEntity in message.caption_entities:
+                if MessageEntity.type == "text_link":
+                    url+=1
+            if url >3:
+                return True 
 
         if message.reply_markup:
             link = message.reply_markup.inline_keyboard
             linkk = [i[0].url for i in link if "t.me" in i[0].url]
 
             if len(linkk) > 3:
-            #    print("#", message.message_id ,"botonera botones:", len(linkk))
                 return True
 
     a = 0
