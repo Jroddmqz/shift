@@ -46,29 +46,36 @@ async def stealmedia(client, message):
             return
    
     def isbotonera(message):
-        ###############
-    #    if message.entities:
-#    #        inlk = message.entities
-#    #        linlk = [i.url for i in inlk if "t.me" in i.url]
-#
-    #        if len(linlk) >3:
-    #            return True
-        ###############
         if message.entities:
-            url = 0
-            for MessageEntity in message.entities:
-                if MessageEntity.type == "text_link":
-                    url+=1
-            if url > 3:
-                print("#", message.message_id ,"botonera texto:", len(linlk))
+            link = message.entities
+            linkk = [i.url for i in link if "t.me" in i.url]
+
+            if len(linkk) >3:
+            #    print("#", message.message_id ,"botonera texto:", len(linkk))
+                return True
+
+#        if message.entities:
+#            url = 0
+#            for MessageEntity in message.entities:
+#                if MessageEntity.type == "text_link":
+#                    url+=1
+#            if url > 3:
+#                print("#", message.message_id ,"botonera texto:", url)
+#                return True
+
+        if message.caption_entities:
+            link = message.caption_entities
+            linkk = [i.url for i in link if "t.me" in i.url]
+            if len (linkk) >3:
+            #    print("#", message.message_id, "botonera texto cap_ent", len(linkk))
                 return True
 
         if message.reply_markup:
-            inlk = message.reply_markup.inline_keyboard
-            linlk = [i[0].url for i in inlk if "t.me" in i[0].url]
+            link = message.reply_markup.inline_keyboard
+            linkk = [i[0].url for i in link if "t.me" in i[0].url]
 
-            if len(linlk) > 3:
-                print("#", message.message_id ,"botonera botones:", len(linlk))
+            if len(linkk) > 3:
+            #    print("#", message.message_id ,"botonera botones:", len(linkk))
                 return True
 
     a = 0
@@ -356,20 +363,7 @@ async def stealimage(client, message):
             await lol.edit("Enter a vailed username or id")
             return
 
-    if w == 3:
-        try:
-            if (msgid.startswith("#")):
-                q = msgid.split("#")
-                q = int(q.pop())
-                msgid = 0
-        except:
-            try:
-                msgid = int(msgid)
-                q = 10
-            except:
-                if not (msg.startswith("#")):
-                    await lol.edit("Enter a msg id valor or #(2-10) for no. images per album")
-    elif w == 4:
+    if w == 4:
         try:
             msgid = int(msgid)
         except:
@@ -392,6 +386,13 @@ async def stealimage(client, message):
 
             if len(linlk) > 3:
                 print("#", message.message_id ,"botonera botones:", len(linlk))
+                return True
+
+        if message.caption_entities:
+            link = message.caption_entities
+            linkk = [i.url for i in link if "t.me" in i.url]
+            if len (linkk) >3:
+                print("#", message.message_id, "botonera texto cap_ent", len(linkk))
                 return True
 
     a = 0
@@ -488,6 +489,21 @@ async def stealimage(client, message):
             await lol.edit(i)
             return
     else:
+        print("msg----ID", msgid)
+        try:
+            msgid = int(msgid)
+            print("msg id:", msgid)
+            q = 10
+        except:
+            try:
+                if (msgid.startswith("#")):
+                    q = msgid.split("#")[1]
+                    #q = int(q.pop())
+                    msgid = 0
+            except:
+                if not (msgid.startswith("#")):
+                    await lol.edit("Enter a msg id valor or #(2-10) for no. images per album")
+                    return
         try:
             async for message in client.iter_history(fromchat, offset_id=msgid, reverse=True):
                 try:
